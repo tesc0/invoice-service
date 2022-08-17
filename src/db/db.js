@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
 
-export default mongoose.connect('mongodb://127.0.0.1:27017/invoice-service', {
+export default mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true
 });

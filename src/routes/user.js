@@ -15,11 +15,9 @@ router.post('/users', async (req, res) => {
 });
 
 router.post('/users/login', async (req, res) => {
-    const invoice = new User(req.body);
-
     try {
-        await invoice.save();
-        res.status(201).send(invoice);
+        const user = await User.findByCredentials(req.body.email, req.body.password)
+        res.status(200).send(user);
     } catch (e) {
         res.status(400).send();
     }    

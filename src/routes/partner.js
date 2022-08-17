@@ -1,9 +1,10 @@
 import express from 'express';
 import Partner from '../models/partner.js';
+import auth from '../util/auth.js';
 
 const router = new express.Router();
 
-router.post('/partners', async (req, res) => {
+router.post('/partners', auth, async (req, res) => {
     const partner = new Partner(req.body);
 
     try {

@@ -1,9 +1,10 @@
 import express from 'express';
 import Invoice from '../models/invoice.js';
+import auth from '../util/auth.js';
 
 const router = new express.Router();
 
-router.post('/invoices', async (req, res) => {
+router.post('/invoices', auth, async (req, res) => {
     const invoice = new Invoice(req.body);
 
     try {
