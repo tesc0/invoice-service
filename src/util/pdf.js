@@ -1,10 +1,7 @@
-import { readFile } from 'fs';
 import { promises as fs } from "fs";
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import wkhtmltopdf from 'wkhtmltopdf';
-import Invoice from '../models/invoice.js';
-import partner from '../models/partner.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

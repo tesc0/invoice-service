@@ -4,6 +4,11 @@ import auth from '../util/auth.js';
 import Partner from '../models/partner.js';
 import InvoiceDocument from '../util/pdf.js';
 
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const router = new express.Router();
 
 router.post('/invoices', auth, async (req, res) => {    
@@ -29,7 +34,7 @@ router.post('/invoices', auth, async (req, res) => {
         }
         
         const invoice = new Invoice(invoiceData);
-        console.log(invoice);
+        //console.log(invoice);
         await invoice.save();
 
         res.status(201).send();
@@ -37,6 +42,29 @@ router.post('/invoices', auth, async (req, res) => {
         console.log(e);
         res.status(400).send();
     }    
+});
+
+router.get('/invoices/:id', auth, async (req, res) => {
+    try {
+        const invoice = await Invoice.findById(req.params.id);        
+        res.status(200).send(invoice);
+    } catch (e) {
+        console.log(e);
+        res.status(400).send();
+    }
+});
+
+router.get('/invoices/:id/pdf', auth, async (req, res) => {
+    try {
+        const invoice = await Invoice.findById(req.params.id);                
+        
+        const invoiceDirectory = __dirname + '\\..\\..\\__invoices\\' + invoice.filename;
+        console.log(invoiceDirectory);
+        res.status(200).sendFile(path.resolve(invoiceDirectory));
+    } catch (e) {
+        console.log(e);
+        res.status(400).send();
+    }
 });
 
 router.get('/invoices', auth, async (req, res) => {
