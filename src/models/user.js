@@ -1,10 +1,8 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-
 import mongoose from 'mongoose';
-const { Schema } = mongoose;
 
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -28,15 +26,22 @@ const userSchema = new Schema({
         required: true,
         trim: true
     }
+}, {
+    timestamps: true
 });
 
-userSchema.pre('save', function(next) {
+userSchema.virtual('partners', {
+    ref: 'Partner',
+    localField: '_id',
+    foreignField: 'user_id'
+});
+
+userSchema.pre('save', async function(next) {
     const user = this;
 
     if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 8);
     }
-
     next();
 });
 
@@ -54,6 +59,16 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
     return user;
 }
+
+userSchema.methods.toJSON = function () {
+    const user = this;
+    const userObject = user.toObject();
+    
+    delete userObject.password;    
+    delete userObject.tokens;
+
+    return userObject;
+};
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this;

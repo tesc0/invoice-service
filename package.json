@@ -9,7 +9,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.2",
     "pdfkit": "^0.13.0",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "wkhtmltopdf": "^0.4.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
@@ -19,7 +20,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "env-cmd ./config/dev.env nodemon src/index.js",
+    "dev": "env-cmd -f ./src/config/dev.env nodemon src/index.js",
     "prod": "node src/index.js"
   },
   "repository": {

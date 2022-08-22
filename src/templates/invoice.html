@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+</head>
+
+<body style="width: 800px; margin: auto">
+
+    <h1 style="text-align: center">Számla</h1>
+    <br><br>
+    <table border="1" width="800">
+        <tr>
+            <td width="400"><b>Kiállító:</b></td>
+            <td><b>Vevő:</b></td>
+        </tr>
+        <tr>
+            <td>[partner_name]</td>
+            <td>[buyer_name]</td>
+        </tr>
+        <tr>
+            <td>[partner_address]</td>
+            <td>[buyer_address]</td>
+        </tr>
+        <tr>
+            <td>Adószám: [partner_taxnumber]</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>[partner_iban]</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>[partner_bankaccount]</td>
+            <td></td>
+        </tr>
+    </table>
+    <br><br>
+    <table border="1" width="800">
+        <tr>
+            <td>
+                Fizetési mód:
+                <br>
+                [payment_method]
+            </td>
+            <td>
+                Teljesítés:
+                <br>
+                [fulfillment_date]
+            </td>
+            <td>
+                Számla kelte:
+                <br>
+                [invoice_date]
+            </td>
+            <td>
+                Fizetési határidő:
+                <br>
+                [due_date]
+            </td>
+            <td>
+                Számlaszám:
+                <br>
+                [invoice_number]
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <table border="1" width="800">
+        <tr>
+            <td>Megnevezés</td>
+            <td>Mennyiség</td>
+            <td>Egységár</td>
+            <td>Nettó ár</td>
+            <td>Áfa %</td>
+            <td>Áfa</td>
+            <td>Bruttó ár</td>
+        </tr>
+        [items]
+    </table>
+    <br><br>
+    <table width="800">
+        <tr>
+            <td width="400"></td>
+            <td>
+                <table width="400">
+                    <tr>
+                        <td width="200" style="text-align: left">Összesen</td>
+                        <td style="text-align: right">[net_sum] [currency]</td>
+                    </tr>
+                    <tr>
+                        <td width="200" style="text-align: left">Áfa</td>
+                        <td style="text-align: right">[vat_sum] [currency]</td>
+                    </tr>
+                    <tr>
+                        <td width="200" style="text-align: left">Fizetendő összesen</td>
+                        <td style="text-align: right">[gross_sum] [currency]</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
